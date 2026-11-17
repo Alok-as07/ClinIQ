@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f8fa;
+  --foreground: #102a43;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  background: #0c3048;
+}
+
+body {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+}
+
+::selection {
+  background: #b8f1e4;
+  color: #102a43;
+}
+
+button, input, select {
+  font: inherit;
+}
+
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #68d7c3;
+  outline-offset: 2px;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 85% -10%, rgba(104, 215, 195, 0.18), transparent 30rem),
+    var(--background) !important;
+}
+
+.app-shell > nav {
+  background: #ffffff !important;
+  border-color: #e2ebef !important;
+}
+
+.app-shell main {
+  color: #102a43;
+}
+
+.eyebrow {
+  color: #2f9f8c;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.panel {
+  border: 1px solid #dce8ed;
+  border-radius: 1rem;
+  background: #ffffff !important;
+  box-shadow: 0 12px 30px rgba(16, 42, 67, 0.05);
+}
+
+.status-pill {
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
