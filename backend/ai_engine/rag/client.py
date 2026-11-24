@@ -11,3 +11,33 @@ def get_qdrant_client() -> QdrantClient:
         url=settings.QDRANT_URL,
         timeout=30,
     )
+
+def initialize_collection():
+    client = get_qdrant_client()
+    
+    collection_name = settings.QDRANT_COLLECTION
+    
+    collections = client.get_collections()
+    
+    existing_collections = {
+        collection.name for collection in collections.collections
+    }
+    
+    if collection_name in existing_collections:
+        return
+    
+    client.create_collection(
+        collection_name=collection_name,
+        vectors_config=VectorParams(
+            size=384,
+            distance=Distance.COSINE
+        )
+    )
+    
+    # Payload indexes improve filtered searches.
+    for field_name in ["tenant_id", "patient_id", "document_id"]:
+        client.create_payload_index(
+            collection_name=collection_name,
+            field_name=field_name,
+            field_schema="keyword"
+        )

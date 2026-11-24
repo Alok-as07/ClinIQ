@@ -1,4 +1,5 @@
 from functools import lru_cache
+import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
@@ -10,17 +11,15 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "your-secret-key"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
-    DATABASE_URL:str=(
-        "postgresql+asyncpg://postgres:postgres@localhost:5432/clinIQ"
-    )
+    DATABASE_URL:str= os.getenv("DATABASE_URL")
 
-    REDIS_URL: str = "redis://localhost:6379/0"
+    REDIS_URL: str = os.getenv("REDIS_URL")
 
-    QDRANT_URL: str = "http://localhost:6333"
-    QDRANT_COLLECTION: str = "clinical_chunks"
+    QDRANT_URL: str = os.getenv("QDRANT_URL")
+    QDRANT_COLLECTION: str = os.getenv("QDRANT_COLLECTION")
 
     ENABLE_VECTOR_SEARCH: bool = True
-    EMBEDDING_MODEL: str = "sentence-transformers/all-MiniLM-L6-v2"
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL")
 
     GEMINI_API_KEY: str = ""
     GEMINI_MODEL: str = "gemini-2.5-flash"
